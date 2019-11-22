@@ -9,4 +9,6 @@ cache:
 branches:
   only:
   - development
+before_script:
+  - psql -c 'create database teamwork_api;' -U postgres
 after_success: yarn coverage

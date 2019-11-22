@@ -4,17 +4,22 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "nyc mocha --recursive",
+    "startDev": "nodemon --require @babel/register server.js",
+    "dev": "nodemon -r dotenv/config",
+    "test": "nyc mocha --timeout 20000 --require @babel/register --require @babel/polyfill --exit --recursive",
+    "production": "babel ./api --out-dir ./prod",
+    "start": "set NODE_ENV=production&&node ./prod/server.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "bcrypt": "^3.0.6",
     "bluebird": "^3.7.1",
     "body-parser": "^1.18.2",
     "chai": "^4.2.0",
     "cloudinary": "^1.16.0",
     "cors": "^2.8.4",
+    "dotenv": "^8.2.0",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
@@ -23,6 +28,10 @@
     "pg-promise": "^9.3.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
     "coveralls": "^3.0.7",
     "cross-env": "^6.0.3",
     "eslint": "^6.6.0",

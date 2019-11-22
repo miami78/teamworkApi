@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const teamworkRoutes = require("./api/routes/teamworkRoutes");
-const userRoutes = require("./api/routes/userRoutes");
+const EmployeeRoute = require("./api/routes/employeeRoute");
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    "GET, POST, PUT, DELETE, PATCH"
   );
   next();
 });
@@ -23,5 +23,5 @@ app.use(bodyParser.json());
 
 // Register routes for all request
 app.use("/api/v1", teamworkRoutes);
-app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/auth", EmployeeRoute);
 module.exports = app;
